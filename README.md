@@ -6,10 +6,10 @@ This project was completed as an assignment for the module titled 'Text Processi
 
 The success of the project was based on the improvements made over a majority class baseline. Below, the confusion matrices for a majority class baseline can be seen. One for a 3-class classification (positive, neutral, negative), one for a 5-class (very positive, positive, neutral, negative, very negative).
 
-![image](images\cf_baseline.png)
+![image](https://github.com/zorbzers/sa-rottentomatoes/blob/master/images/cf_baseline.png)
 
 Here, the confusion matrices can be seen for the final model; split into using all words, and using selected features.
-![image](images\cf_final.png)
+![image](https://github.com/zorbzers/sa-rottentomatoes/blob/master/images/cf_final.png)
 
 ##### Majority Class Baseline Macro-f1 Scores
 | Configuration | Macro-f1 Score |
@@ -33,10 +33,11 @@ The full submitted project report can be viewed [here](submission_report.pdf).
 #### Classifier
 The project implements a multinomial Naive Bayes classifier with Laplace smoothing from scratch, based on the decision below:
 
-\[ s^* = \underset{s_i}{argmax} \ p(s_i) \prod_{j=1}^{N} p(t_j|s_i) \]
-\[ p(t_j|s_i) = \frac{count(t_j,s_i) + \alpha}{(\sum_{f}count(t_f,s_i)) + \alpha|V|} \]
+$$ s^* = \underset{s_i}{argmax} \ p(s_i) \prod_{j=1}^{N} p(t_j|s_i) $$
 
-Here, \(\alpha > 0\) is the Laplace smoothing parameter (typically 1).
+$$ p(t_j|s_i) = \frac{count(t_j,s_i) + \alpha}{(\sum_{f}count(t_f,s_i)) + \alpha|V|} $$
+
+Here, $`\alpha > 0`$ is the Laplace smoothing parameter (typically 1).
 
 #### Preprocessing
 A variety of preprocessing methods are fully implemented, including:
