@@ -1,3 +1,4 @@
+.gitignore
 __MACOSX
 __pycache__
 .vscode
