@@ -49,7 +49,7 @@ A variety of preprocessing methods are fully implemented, including:
 - Stemming
 - Lemmatization
 
-The best models, however, do not use all methods in unison. Through empirical testing optimal combinations of preprocessing methods where identified (see full report for more).
+The best models, however, do not use all methods in unison. Through empirical testing optimal combinations of preprocessing methods where identified (see the [full report](submission_report.pdf) and [this section](#analysis-and-optimisations) for more).
 
 #### Feature Selection
 Three methods are fully implemented:
@@ -57,7 +57,7 @@ Three methods are fully implemented:
 - TF-IDF
 - Selecting nouns, verbs, adjectives and adverbs
 
-Here, Chi<sup>2</sup> was selected as the most optimal method.
+Here, Chi<sup>2</sup> was selected as the most optimal method (again, see the [full report](submission_report.pdf) and [this section](#analysis-and-optimisations) for more).
 
 ## Usage
 #### Requirements
@@ -114,3 +114,50 @@ pip install -r requirements.txt
     - -confusion_matrix is an optional value defining whether confusion matrices should be shown.
 
 - Alternatively, a script `auto_results.py` is included to run all 4 configurations.
+
+## Analysis and Optimisations
+The [full report](submission_report.pdf) contains the critical points to be made about the analysis and optimisations conducted for this project, however, the report was restricted to a page limit. In this section, full details of the empirical testing conducted will be included.
+
+#### Feature selection: analysis of the three methods
+As mentioned, three methods were chosen to compare:
+
+1. NVAR (Nouns, verbs, adjectives and adverbs)
+    - As in the name, this involves selecting all nouns, verbs, adjectives and adverbs as features to be used.
+    - Initially, this was chosen through the comparison of all combinations of nouns, verbs, adjectives and/or adverbs as a method. Despite this comparison, the use of all 4 in conjunction yielded the best results.
+2. TF-IDF
+    - TF-IDF was selected for it's ability to capture the relevance of a term within a phrase.
+    - The TF-IDF of a given term in a given document is calculated as:
+        $$ \textit{TF-IDF}_{(t,d)} = TF_{(t,d)} \times \log{\frac{|D|}{DF_{t}}} $$ 
+    Where TF(t,d) is the frequency of term t in document d. D is the document set, and DF<sub>t</sub> is the number of documents containing term t.
+3. Chi<sup>2</sup>
+    - Chi<sup>2</sup> was selected due to its effectiveness in assessing the independence between features and the target class.
+    - The Chi<sup>2</sup> statistic for a feature is given by:
+
+    $$ \chi^2 = \sum \frac{(O_{ij} - E_{ij})^2}{E_{ij}} $$
+
+    Here O<sub>ij</sub> is the observed frequency for a feature and class, and E<sub>ij</sub> is the expected frequency.
+
+All three methods were compared when using just lowercasing for preprocessing, and $`\alpha = 1`$. The table below shows the performance of each under these conditions:
+
+<img src="images\initial-f1-results.png" width="400"/>
+
+Overall, at this point, all 3 methods performed similarly. So, all 3 were used in the next section, in hopes of creating a larger disparity between the methods.
+
+#### Preprocessing: finding the optimal combination for each feature selection method
+Through empirical testing, all 3 methods were tested with all possible combinations of preprocessing method(s).
+
+##### Top Combinations for NVAR
+<img src="images\optimal-pre-nvar.png" width="600"/>
+
+##### Top Combinations for TF-IDF
+<img src="images\optimal-pre-tfidf.png" width="600"/>
+
+##### Top Combinations for Chi<sup>2</sup>
+<img src="images\optimal-pre-chi.png" width="600"/>
+
+##### Comparison</sup>
+<img src="images\f1-results-it123-v2.png" width="400"/>
+
+#### Laplace Parameter: finding the optimal smoothing parameter
+
+<img src="images\laplace-opti.png" width="600"/>
