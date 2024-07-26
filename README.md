@@ -5,27 +5,70 @@ This project was completed as an assignment for the module titled 'Text Processi
 >The aim of this project is to implement a multinomial Naive Bayes model for a sentiment analysis task using the Rotten Tomatoes movie review dataset. This dataset is derived from the "Sentiment Analysis on Movie Reviews" [Kaggle competition](https://www.kaggle.com/competitions/sentiment-analysis-on-movie-reviews/overview), that uses data from the works of [Pang and Lee](https://aclanthology.org/P05-1015) and [Socher at al.](https://aclanthology.org/D13-1170). Obstacles like sentence negation, sarcasm, terseness, language ambiguity, and many others make this task very challenging.
 
 The success of the project was based on the improvements made over a majority class baseline. Below, the confusion matrices for a majority class baseline can be seen. One for a 3-class classification (positive, neutral, negative), one for a 5-class (very positive, positive, neutral, negative, very negative).
-
-![image](https://github.com/zorbzers/sa-rottentomatoes/blob/master/images/cf_baseline.png)
+<p align="center">
+  <img src="https://github.com/zorbzers/sa-rottentomatoes/blob/master/images/cf_baseline.png"/>
+</p>
 
 Here, the confusion matrices can be seen for the final model; split into using all words, and using selected features.
-![image](https://github.com/zorbzers/sa-rottentomatoes/blob/master/images/cf_final.png)
+<p align="center">
+  <img src="https://github.com/zorbzers/sa-rottentomatoes/blob/master/images/cf_final.png"/>
+</p>
+
 
 ##### Majority Class Baseline Macro-f1 Scores
-| Configuration | Macro-f1 Score |
-| - | - |
-| 3-class | 0.485913 | 
-| 5-class | 0.284448 |
+<table align="center">
+    <thead style="background-color: #f0f0f0;">
+        <tr>
+            <th>Configuration</th>
+            <th>Macro-f1 Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="background-color: #f0f0f0;"><strong>3-class</strong></td>
+            <td>0.485913</td>
+        </tr>
+        <tr>
+            <td style="background-color: #f0f0f0;"><strong>5-class</strong></td>
+            <td>0.284448</td>
+        </tr>
+    </tbody>
+</table>
 
 ##### Final Implementation Macro-f1 Scores and % Improvement
-| | Macro-f1 Score | Improvement from baseline(%) |
-| - | - | - |
-| 3-class (features) | 0.536483 | 10.41% |
-| 5-class (features) | 0.369824 | 30.01% |
-| 3-class (all-words) | 0.527507 | 8.56% |
-| 5-class (all-words) | 0.345890 | 21.60% |
+<table align="center">
+    <thead style="background-color: #f0f0f0;">
+        <tr>
+            <th></th>
+            <th>Macro-f1 Score</th>
+            <th>Improvement From Baseline(%)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="background-color: #f0f0f0;"><strong>3-class (features)</strong></td>
+            <td>0.536483</td>
+            <td>10.41%</td>
+        </tr>
+        <tr>
+            <td style="background-color: #f0f0f0;"><strong>5-class (features)</strong></td>
+            <td>0.369824</td>
+            <td>30.01%</td>
+        </tr>
+        <tr>
+            <td style="background-color: #f0f0f0;"><strong>3-class (all words)</strong></td>
+            <td>0.527507</td>
+            <td>8.56%</td>
+        </tr>
+        <tr>
+            <td style="background-color: #f0f0f0;"><strong>5-class (all words)</strong></td>
+            <td>0.345890</td>
+            <td>21.60%</td>
+        </tr>
+    </tbody>
+</table>
 
-
+<hr>
 
 ## Implementation Details
 The full submitted project report can be viewed [here](submission_report.pdf).
@@ -58,6 +101,8 @@ Three methods are fully implemented:
 - Selecting nouns, verbs, adjectives and adverbs
 
 Here, Chi<sup>2</sup> was selected as the most optimal method (again, see the [full report](submission_report.pdf) and [this section](#analysis-and-optimisations) for more).
+
+<hr>
 
 ## Usage
 #### Requirements
@@ -115,8 +160,11 @@ pip install -r requirements.txt
 
 - Alternatively, a script `auto_results.py` is included to run all 4 configurations.
 
+<hr>
+
 ## Analysis and Optimisations
 The [full report](submission_report.pdf) contains the critical points to be made about the analysis and optimisations conducted for this project, however, the report was restricted to a page limit. In this section, full details of the empirical testing conducted will be included.
+
 
 #### Feature selection: analysis of the three methods
 As mentioned, three methods were chosen to compare:
@@ -139,25 +187,125 @@ As mentioned, three methods were chosen to compare:
 
 All three methods were compared when using just lowercasing for preprocessing, and $`\alpha = 1`$. The table below shows the performance of each under these conditions:
 
-<img src="images\initial-f1-results.png" width="400"/>
+<!-- <img src="images\initial-f1-results.png" width="400"/> -->
+
+<table align="center">
+    <thead style="background-color: #f0f0f0;">
+        <tr>
+            <th>Feature Selection</th>
+            <th>TF-IDF</th>
+            <th>NVAR</th>
+            <th>Chi<sup>2</sup></th>
+        </tr>
+        <tr>
+            <th>Preprocessing</th>
+            <th>LC</th>
+            <th>LC</th>
+            <th>LC</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="background-color: #f0f0f0;"><strong>3-class (features)</strong></td>
+            <td>0.509871</td>
+            <td>0.510401</td>
+            <td>0.507740</td>
+        </tr>
+        <tr>
+            <td style="background-color: #f0f0f0;"><strong>5-class (features)</strong></td>
+            <td>0.336089</td>
+            <td>0.313913</td>
+            <td>0.337628</td>
+        </tr>
+        <tr>
+            <td style="background-color: #f0f0f0;"><strong>3-class (all words)</strong></td>
+            <td>0.487747</td>
+            <td>0.487747</td>
+            <td>0.487747</td>
+        </tr>
+        <tr>
+            <td style="background-color: #f0f0f0;"><strong>5-class (all words)</strong></td>
+            <td>0.297355</td>
+            <td>0.297355</td>
+            <td>0.297355</td>
+        </tr>
+    </tbody>
+</table>
 
 Overall, at this point, all 3 methods performed similarly. So, all 3 were used in the next section, in hopes of creating a larger disparity between the methods.
 
+<hr>
+
 #### Preprocessing: finding the optimal combination for each feature selection method
-Through empirical testing, all 3 methods were tested with all possible combinations of preprocessing method(s).
+Through empirical testing, all 3 methods were tested with all possible combinations of preprocessing method(s). Typically, the Laplace constant is 1, so during this testing, this was kept constant due to time constraints on the assignment. The 20 best-performing combinations are displayed for each method below, for both 3-class and 5-class.
 
-##### Top Combinations for NVAR
-<img src="images\optimal-pre-nvar.png" width="600"/>
+<h5 align="center">Top Combinations for NVAR</h5>
+<p align="center"><img src="images\optimal-pre-nvar.png" width="600"/></p>
+<hr>
+<h5 align="center">Top Combinations for TF-IDF</h5>
+<p align="center"><img src="images\optimal-pre-tfidf.png" width="600"/></p>
+<hr>
+<h5 align="center">Top Combinations for Chi<sup>2</sup></h5>
+<p align="center"><img src="images\optimal-pre-chi.png" width="600"/></p>
+<hr>
 
-##### Top Combinations for TF-IDF
-<img src="images\optimal-pre-tfidf.png" width="600"/>
+##### Overall Comparison
+The table below shows a comparison between each method using their most optimal preprocessing configuration.
+<table align="center">
+    <thead>
+        <tr style="background-color: #f0f0f0;">
+            <th>Feature Selection</th>
+            <th>TF-IDF</th>
+            <th>NVAR</th>
+            <th>Chi<sup>2</sup></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="background-color: #f0f0f0; font-weight: bold;">
+            <td>Preprocessing</td>
+            <td>Optimal</td>
+            <td>Optimal</td>
+            <td>Optimal</td>
+        </tr>
+        <tr style="background-color: #f0f0f0; font-weight: bold;">
+            <td>Laplace Constant</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td style="background-color: #f0f0f0;"><strong>3-class (features)</strong></td>
+            <td>0.527507</td>
+            <td>0.515927</td>
+            <td>0.536483</td>
+        </tr>
+        <tr>
+            <td style="background-color: #f0f0f0;"><strong>5-class (features)</strong></td>
+            <td>0.345227</td>
+            <td>0.336637</td>
+            <td>0.359535<br></td>
+        </tr>
+        <tr>
+            <td style="background-color: #f0f0f0;"><strong>3-class (all words)</strong></td>
+            <td>0.524420</td>
+            <td>0.504836</td>
+            <td>0.503334</td>
+        </tr>
+        <tr>
+            <td style="background-color: #f0f0f0;"><strong>5-class (all words)</strong></td>
+            <td>0.333311</td>
+            <td>0.324886</td>
+            <td>0.307602</td>
+        </tr>
+    </tbody>
+</table>
 
-##### Top Combinations for Chi<sup>2</sup>
-<img src="images\optimal-pre-chi.png" width="600"/>
-
-##### Comparison</sup>
-<img src="images\f1-results-it123-v2.png" width="400"/>
+It's much clearer now that TF-IDF and Chi<sup>2</sup> perform better than NVAR. At this point, Chi<sup>2</sup> was chosen as the focus. Although TF-IDF outperforms it when feature selection is not applied, the better competitor when using feature selection was chosen as it was deemed more valuable.
+<hr>
 
 #### Laplace Parameter: finding the optimal smoothing parameter
+Finally, testing was conducted to find the optimal smoothing parameter for Laplace when using Chi<sup>2</sup>. The plots below show this for 3-class and 5-class, both with and without feature selection.
 
-<img src="images\laplace-opti.png" width="600"/>
+<p align="center"><img src="images\laplace-opti.png" width="600"/></p>
+
+An interesting observation is that the optimal value was close to 1 as expected when feature selection is applied, however, when all words are used, it was much closer to 0.4. This could be because feature selection reduces the number of features, so there is more need for smoothing to handle the reduced feature space effectively. In contrast, using all words increases the feature space, which might require less smoothing to achieve optimal performance.
