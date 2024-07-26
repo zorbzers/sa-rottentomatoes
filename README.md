@@ -15,7 +15,7 @@ Here, the confusion matrices can be seen for the final model; split into using a
 </p>
 
 
-##### Majority Class Baseline Macro-f1 Scores
+<h5 align="center"> Majority Class Baseline Macro-f1 Scores<h5>
 <table align="center">
     <thead style="background-color: #f0f0f0;">
         <tr>
@@ -35,7 +35,7 @@ Here, the confusion matrices can be seen for the final model; split into using a
     </tbody>
 </table>
 
-##### Final Implementation Macro-f1 Scores and % Improvement
+<h5 align="center">Final Implementation Macro-f1 Scores and % Improvement</h5>
 <table align="center">
     <thead style="background-color: #f0f0f0;">
         <tr>
